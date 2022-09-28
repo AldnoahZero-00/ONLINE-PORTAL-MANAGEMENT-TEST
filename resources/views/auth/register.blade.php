@@ -1,17 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+    function yesnoCheck(that)
+    {
+        if (that.value == "old")
+        {
+            document.getElementById("ifYes").style.display = "block";
+        } 
+        else
+        {
+            document.getElementById("ifYes").style.display = "none";
+        }
+    }
+</script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create an Account') }}</div>
+                <div class="card-header">{{ __('Register Account') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+
                         <div class="row mb-3">
-                            <label for="lastname" class="col-md-4 col-form-label text-md-end">{{ __('Lastname') }}</label>
+                            <label for="lastname" class="col-md-4 col-form-label text-md-end">{{ __('Last Name *') }}</label>
 
                             <div class="col-md-6">
                                 <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
@@ -25,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="firstname" class="col-md-4 col-form-label text-md-end">{{ __('Firstname') }}</label>
+                            <label for="firstname" class="col-md-4 col-form-label text-md-end">{{ __('First Name *') }}</label>
 
                             <div class="col-md-6">
                                 <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="firstname" autofocus>
@@ -37,9 +52,8 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row mb-3">
-                            <label for="middlename" class="col-md-4 col-form-label text-md-end">{{ __('Middlename') }}</label>
+                            <label for="middlename" class="col-md-4 col-form-label text-md-end">{{ __('Middle Name *') }}</label>
 
                             <div class="col-md-6">
                                 <input id="middlename" type="text" class="form-control @error('middlename') is-invalid @enderror" name="middlename" value="{{ old('middlename') }}" required autocomplete="middlename" autofocus>
@@ -52,8 +66,10 @@
                             </div>
                         </div>
 
+                        <hr>
+
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address * ') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -65,27 +81,14 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="row mb-3">
-                        <label for="student_type" class="col-md-4 col-form-label text-md-end">{{ __('Student Type') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Student Type * ') }}</label>
 
                             <div class="col-md-6">
-                                <select id="student_type" name="student_type" class="form-control" required>
-                                    <option value='new'>New Student</option>;
-                                    <option value='old'>Old Student</option>;
-                                    <option value='transferee'>Transferee</option>;
-                                    <!-- <option value='payment_only'>Payment Only (for on-site registered)</option>; -->
-                                </select>
-                            </div>
-                        </div>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                        <div class="row mb-3" hidden>
-                            <label for="old_id" class="col-md-4 col-form-label text-md-end">{{ __('Old Student Id') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="old_id" type="text" class="form-control @error('old_id') is-invalid @enderror" name="old_id" value="{{ old('old_id') }}" required autocomplete="old_id">
-
-                                @error('old_id')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -94,6 +97,7 @@
                         </div>
 
                         <hr>
+
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
@@ -116,11 +120,6 @@
                             </div>
                         </div>
 
-   
-
-
-
-                        <hr>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
